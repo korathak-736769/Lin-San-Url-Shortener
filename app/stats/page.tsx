@@ -31,10 +31,14 @@ export default function StatsPage() {
     const extractShortCodeFromUrl = (url: string): string | null => {
         try {
             const urlObj = new URL(url)
-            const pathParts = urlObj.pathname.split('/')
-            if (pathParts.length >= 3 && pathParts[1] === 'link') {
-                return pathParts[2]
+            const pathParts = urlObj.pathname.split('/').filter(part => part !== '')
+            
+            if (pathParts.length === 2 && pathParts[0] === 'link') {
+                return pathParts[1]
+            } else if (pathParts.length === 1) {
+                return pathParts[0]
             }
+            
             return null
         } catch {
             return null
