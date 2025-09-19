@@ -54,7 +54,7 @@ export default function HomePage() {
 
     setIsLoading(true)
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/link`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function HomePage() {
       const data: CreateLinkResponse = await response.json()
 
       if (data.success) {
-        const generatedShortUrl = `${process.env.NEXT_PUBLIC_API_URL}/link/${data.data.short_code}`
+        const generatedShortUrl = `${process.env.NEXT_PUBLIC_API_URL}/${data.data.short_code}`
         setShortUrl(generatedShortUrl)
         setShortCode(data.data.short_code)
         toast({
@@ -106,7 +106,7 @@ export default function HomePage() {
     if (!shortCode) return
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/link/his/${shortCode}`)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/his/${shortCode}`)
       const data: ClickHistoryResponse = await response.json()
 
       if (data.success) {

@@ -32,7 +32,6 @@ export default function StatsPage() {
         try {
             const urlObj = new URL(url)
             const pathParts = urlObj.pathname.split('/')
-            // Expected format: /link/shortcode
             if (pathParts.length >= 3 && pathParts[1] === 'link') {
                 return pathParts[2]
             }
@@ -65,7 +64,7 @@ export default function StatsPage() {
 
         setIsLookupLoading(true)
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/link/his/${extractedShortCode}`)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/his/${extractedShortCode}`)
             const data: ClickHistoryResponse = await response.json()
 
             if (data.success) {
@@ -198,7 +197,7 @@ export default function StatsPage() {
                         <div className="flex flex-col gap-2">
                             <Input
                                 type="url"
-                                placeholder="https://your-domain.com/link/abc123"
+                                placeholder="https://example.com/abc123"
                                 value={lookupUrl}
                                 onChange={(e) => setLookupUrl(e.target.value)}
                                 className="h-10 sm:h-12 text-xs sm:text-sm lg:text-base px-3 sm:px-4"
